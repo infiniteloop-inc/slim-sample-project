@@ -1,0 +1,8 @@
+* text=auto eol=lf
+.* text eol=lf
+_* text eol=lf
+*.bat text eol=crlf
+*.sh text eol=lf
+
+.gitignore export-ignore
+README.md export-ignore
