@@ -11,6 +11,14 @@
         "adbario/php-dot-notation": "^3.2",
         "monolog/monolog": "^3.2"
     },
+    "autoload": {
+        "files": [
+            "app/helpers.php"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7",
         "vimeo/psalm": "^5.4"
