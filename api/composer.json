@@ -1,6 +1,8 @@
 {
     "require": {
         "slim/slim": "4.*",
-        "slim/psr7": "^1.6"
+        "slim/psr7": "^1.6",
+        "nyholm/psr7": "^1.5",
+        "nyholm/psr7-server": "^1.0"
     }
 }
