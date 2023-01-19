@@ -6,7 +6,8 @@
         "nyholm/psr7-server": "^1.0",
         "guzzlehttp/psr7": "^2",
         "laminas/laminas-diactoros": "^2.24",
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "php-di/slim-bridge": "^3.3"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7",
