@@ -6,8 +6,6 @@ use App\Adapter\Http\Handlers\ErrorHandler;
 use App\Support\Logger\AppLogger;
 use DI\Bridge\Slim\Bridge;
 use Dotenv\Dotenv;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
 use Slim\Middleware\ErrorMiddleware;
 
@@ -24,10 +22,9 @@ $app = Bridge::create($container);
 // setup logger (initializable singleton)
 AppLogger::initialize($container->get(LoggerInterface::class));
 
-$app->get('/', function (Request $request, Response $response) {
-    $response->getBody()->write("Hello world!");
-    return $response;
-});
+// register routes
+$routes = require __DIR__ . '/../routes/api.php';
+$routes($app);
 
 // Add error handling middleware
 $displayErrorDetails = true;

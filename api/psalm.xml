@@ -11,6 +11,7 @@
         <directory name="app" />
         <directory name="config" />
         <directory name="public" />
+        <directory name="routes" />
         <ignoreFiles>
             <directory name="vendor" />
         </ignoreFiles>
