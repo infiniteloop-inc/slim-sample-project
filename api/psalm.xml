@@ -9,6 +9,7 @@
 >
     <projectFiles>
         <directory name="app" />
+        <directory name="bootstrap" />
         <directory name="config" />
         <directory name="public" />
         <directory name="routes" />
