@@ -13,7 +13,9 @@
         "cakephp/chronos": "^2.3",
         "symfony/http-foundation": "^6.2",
         "illuminate/cache": "^9.48",
-        "illuminate/redis": "^9.48"
+        "illuminate/redis": "^9.48",
+        "doctrine/orm": "^2.14",
+        "symfony/cache": "^6.2"
     },
     "autoload": {
         "files": [
