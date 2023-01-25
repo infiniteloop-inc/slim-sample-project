@@ -18,12 +18,19 @@ services:
 
   api:
     build: ./api/docker
+    depends_on:
+      - redis
     environment:
       LANG: ja_JP.UTF-8
       TZ: Asia/Tokyo
     volumes:
       - php-fpm-socket:/var/run/php-fpm:cached
       - ./api:/opt/app/:cached
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
 
 volumes:
   php-fpm-socket:

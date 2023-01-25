@@ -7,6 +7,10 @@ RUN apt-get update && apt-get install -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+# install redis
+RUN pecl install redis \
+ && docker-php-ext-enable  redis
+
 # install composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
