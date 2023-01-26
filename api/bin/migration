@@ -1,0 +1,50 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use App\Support\Logger\AppLogger;
+use Doctrine\Migrations\DependencyFactory;
+use Doctrine\Migrations\Configuration\Migration\PhpFile;
+use Doctrine\Migrations\Configuration\EntityManager\ExistingEntityManager;
+use Doctrine\Migrations\Tools\Console\Command;
+use Doctrine\ORM\EntityManagerInterface;
+use Dotenv\Dotenv;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Console\Application;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$envFile = (env('APP_ENV') === 'testing' and file_exists(__DIR__ . '/../.env.testing')) ? '.env.testing' : '.env';
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../', $envFile);
+$dotenv->load();
+
+$container = require __DIR__ . "/../config/dependencies.php";
+
+AppLogger::initialize($container->get(LoggerInterface::class));
+
+$entityManager = $container->get(EntityManagerInterface::class);
+$connection = $entityManager->getConnection();
+
+$config = new PhpFile('migrations.php');
+
+$dependencyFactory = DependencyFactory::fromEntityManager($config, new ExistingEntityManager($entityManager));
+
+$cli = new Application('Doctrine Migrations');
+$cli->setCatchExceptions(true);
+
+$cli->addCommands([
+    new Command\DiffCommand($dependencyFactory),
+    new Command\DumpSchemaCommand($dependencyFactory),
+    new Command\ExecuteCommand($dependencyFactory),
+    new Command\GenerateCommand($dependencyFactory),
+    new Command\LatestCommand($dependencyFactory),
+    new Command\ListCommand($dependencyFactory),
+    new Command\MigrateCommand($dependencyFactory),
+    new Command\RollupCommand($dependencyFactory),
+    new Command\StatusCommand($dependencyFactory),
+    new Command\SyncMetadataCommand($dependencyFactory),
+    new Command\VersionCommand($dependencyFactory),
+]);
+
+$cli->run();
