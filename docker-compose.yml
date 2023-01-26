@@ -19,6 +19,7 @@ services:
   api:
     build: ./api/docker
     depends_on:
+      - mysql
       - redis
     environment:
       LANG: ja_JP.UTF-8
@@ -31,6 +32,19 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
+  
+  mysql:
+    build: ./mysql
+    env_file:
+      - ./api/.env
+    environment:
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3306:3306"
+    volumes:
+      -  db-volume:/var/lib/mysql:cached
+      -  ${APP_PATH-.}/mysql/init:/docker-entrypoint-initdb.d:ro
 
 volumes:
   php-fpm-socket:
+  db-volume:
