@@ -16,7 +16,8 @@
         "illuminate/redis": "^9.48",
         "doctrine/orm": "^2.14",
         "symfony/cache": "^6.2",
-        "ext-redis": "*"
+        "ext-redis": "*",
+        "doctrine/migrations": "^3.5"
     },
     "autoload": {
         "files": [
