@@ -1,0 +1,33 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use App\Support\Logger\AppLogger;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Console\ConsoleRunner;
+use Doctrine\ORM\Tools\Console\EntityManagerProvider\SingleManagerProvider;
+use Dotenv\Dotenv;
+use Psr\Log\LoggerInterface;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$envFile = (env('APP_ENV') === 'testing' and file_exists(__DIR__ . '/../.env.testing')) ? '.env.testing' : '.env';
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../', $envFile);
+$dotenv->load();
+
+$container = require __DIR__ . "/../config/dependencies.php";
+
+AppLogger::initialize($container->get(LoggerInterface::class));
+
+$entityManager = $container->get(EntityManagerInterface::class);
+
+$commands = [
+    // If you want to add your own custom console commands,
+    // you can do so here.
+];
+
+ConsoleRunner::run(
+    new SingleManagerProvider($entityManager),
+    $commands
+);

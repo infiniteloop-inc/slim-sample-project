@@ -8,11 +8,11 @@ psalm:
 
 .PHONY: phpcs
 phpcs:
-	docker-compose exec api ./vendor/bin/phpcs --standard=PSR12 --exclude=Generic.Files.LineLength app bootstrap config public routes
+	docker-compose exec api ./vendor/bin/phpcs --standard=PSR12 --exclude=Generic.Files.LineLength app bin bootstrap config public routes
 
 .PHONY: phpcbf
 phpcbf:
-	docker-compose exec api ./vendor/bin/phpcbf --standard=PSR12 --exclude=Generic.Files.LineLength app bootstrap config public routes
+	docker-compose exec api ./vendor/bin/phpcbf --standard=PSR12 --exclude=Generic.Files.LineLength app bin bootstrap config public routes
 
 .PHONY: psysh
 psysh:
