@@ -17,7 +17,8 @@
         "doctrine/orm": "^2.14",
         "symfony/cache": "^6.2",
         "ext-redis": "*",
-        "doctrine/migrations": "^3.5"
+        "doctrine/migrations": "^3.5",
+        "ramsey/uuid": "^4.7"
     },
     "autoload": {
         "files": [
