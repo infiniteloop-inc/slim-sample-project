@@ -25,6 +25,11 @@ class JsonResponseFactory
         return static::create(static::serialize($data));
     }
 
+    public static function empty(): ResponseInterface
+    {
+        return static::create(static::serialize([]));
+    }
+
     protected static function serialize(array|JsonSerializable $data): string
     {
         return json_encode($data, JSON_UNESCAPED_UNICODE);
