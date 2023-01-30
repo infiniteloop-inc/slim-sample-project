@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Adapter\Http\Controllers;
 
 use App\Support\Http\JsonResponseFactory;
+use App\UseCases\User\GetUser;
 use App\UseCases\User\Register;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -12,8 +13,17 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 class UserController extends BaseController
 {
     public function __construct(
+        private GetUser $getUser,
         private Register $register,
     ) {
+    }
+
+    public function user(Request $request): Response
+    {
+        $userId = $this->getLoggedInUser()->id();
+
+        $response = $this->getUser->execute($userId);
+        return JsonResponseFactory::createWithSerialize($response);
     }
 
     public function register(Request $request): Response
