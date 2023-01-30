@@ -9,7 +9,7 @@ use App\UseCases\User\Register;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class UserController
+class UserController extends BaseController
 {
     public function __construct(
         private Register $register,
@@ -18,6 +18,10 @@ class UserController
 
     public function register(Request $request): Response
     {
+        if ($this->isLoggedIn()) {
+            // TODO: (note) The following code has been disabled for debug
+            // throw new RuntimeException('User is already registered.');
+        }
         $params = $request->getParsedBody();
         $name = $params['name'] ?? '';
         assert(is_string($name));

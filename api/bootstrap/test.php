@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use App\Support\Logger\AppLogger;
 use Dotenv\Dotenv;
+use Psr\Log\LoggerInterface;
 
 $envFileDir = __DIR__ . '/../';
 $envFileName = '.env.testing';
@@ -16,3 +18,7 @@ if (getenv('APP_ENV') !== 'testing' or !file_exists($envFileDir . $envFileName))
 
 $dotenv = Dotenv::createImmutable($envFileDir, $envFileName);
 $dotenv->load();
+
+$container = require __DIR__ . "/../config/dependencies.php";
+
+AppLogger::initialize($container->get(LoggerInterface::class));

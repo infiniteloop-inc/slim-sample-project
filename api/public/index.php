@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Adapter\Http\Handlers\ErrorHandler;
+use App\Adapter\Http\Middlewares\Authenticate;
 use App\Adapter\Http\Middlewares\StartSession;
 use App\Support\Logger\AppLogger;
 use DI\Bridge\Slim\Bridge;
@@ -29,6 +30,7 @@ $routes($app);
 
 // register middlewares
 $app->addBodyParsingMiddleware();
+$app->add($container->get(Authenticate::class));
 $app->add($container->get(StartSession::class));
 
 // Add error handling middleware

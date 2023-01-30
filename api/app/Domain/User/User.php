@@ -17,6 +17,11 @@ class User
     ) {
     }
 
+    public function id(): string
+    {
+        return $this->userDto->userId;
+    }
+
     public function regenerateAuthToken(): void
     {
         $this->userDto->authToken = self::generateAuthToken();

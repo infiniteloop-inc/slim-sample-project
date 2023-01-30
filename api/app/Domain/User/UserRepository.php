@@ -20,6 +20,15 @@ class UserRepository
         return new User($userDto);
     }
 
+    public function resolveByAuthToken(string $authToken): ?User
+    {
+        $userDto = $this->userQuery->findOneBy(['authToken' => $authToken]);
+        if ($userDto === null) {
+            return null;
+        }
+        return new User($userDto);
+    }
+
     public function persist(User $user): void
     {
         $this->userQuery->persist($user->userDto);
