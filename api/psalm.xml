@@ -14,8 +14,19 @@
         <directory name="config" />
         <directory name="public" />
         <directory name="routes" />
+        <directory name="tests" />
         <ignoreFiles>
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>
+
+    <issueHandlers>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="tests" />
+                <referencedProperty name="Test\Unit\UserTest::$backupStaticAttributes"/>
+                <referencedProperty name="Test\Unit\UserTest::$runTestInSeparateProcess"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+    </issueHandlers>
 </psalm>

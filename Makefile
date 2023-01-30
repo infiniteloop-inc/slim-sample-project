@@ -32,12 +32,16 @@ psalm:
 
 .PHONY: phpcs
 phpcs:
-	docker-compose exec api ./vendor/bin/phpcs --standard=PSR12 --exclude=Generic.Files.LineLength app bin bootstrap config public routes
+	docker-compose exec api ./vendor/bin/phpcs --standard=PSR12 --exclude=Generic.Files.LineLength app bin bootstrap config public routes tests
 
 .PHONY: phpcbf
 phpcbf:
-	docker-compose exec api ./vendor/bin/phpcbf --standard=PSR12 --exclude=Generic.Files.LineLength app bin bootstrap config public routes
+	docker-compose exec api ./vendor/bin/phpcbf --standard=PSR12 --exclude=Generic.Files.LineLength app bin bootstrap config public routes tests
 
 .PHONY: psysh
 psysh:
 	docker-compose exec api ./vendor/bin/psysh --config ./.psysh.php
+
+.PHONY: phpunit
+phpunit:
+	docker-compose exec api ./vendor/bin/phpunit
